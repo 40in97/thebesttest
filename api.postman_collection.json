@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "dcb08caf-fd3e-404b-bc3f-9f4a7ac78a5a",
+		"name": "UmnyPolis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19682280"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\": \"qa@qa.qa\", \r\n\"password\": \"111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v1/users/obtain-token",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v1",
+						"users",
+						"obtain-token"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "qa@qa.qa",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "111",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "voditel",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "189f7da30c75b968263283b349dbd9716973e69e",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"Имя\",\r\n  \"last_name\": \"Фамилия\",\r\n  \"patronymic\": \"Отчество\",\r\n  \"birth_date\": \"1990-01-01\",\r\n  \"driving_experience_started\": \"2010-10-10\",\r\n  \"driver_licenses\": [\r\n    {\r\n      \"credential_type\": \"DRIVER_LICENSE\",\r\n      \"number\": \"012345\",\r\n      \"series\": \"1234\",\r\n      \"issue_date\": \"2010-10-10\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v1/insured_objects/drivers",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v1",
+						"insured_objects",
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sobstvennik",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "189f7da30c75b968263283b349dbd9716973e69e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"last_name\": \"Фамилия\",\r\n  \"first_name\": \"Имя\",\r\n  \"patronymic\": \"Отчество\",\r\n  \"birth_date\": \"1990-01-01\",\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"RUSSIAN_INTERNAL_PASSPORT\",\r\n      \"issue_date\": \"2017-03-08\",\r\n      \"issue_point\": \"УФМС\",\r\n      \"issue_point_code\": \"123-456\",\r\n      \"number\": \"123456\",\r\n      \"series\": \"1234\"\r\n    }\r\n  ],\r\n  \"address\": [\r\n    {\r\n      \"address_query\": \"г Санкт-Петербург, г Ломоносов, ул Швейцарская, д 1 к 1, кв 1\",\r\n      \"address_type\": \"LEGAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7800000000000\",\r\n      \"city_kladr_id\": \"7800000600000\"\r\n    },\r\n    {\r\n      \"address_query\": \"г Санкт-Петербург, г Ломоносов, ул Швейцарская, д 1 к 1, кв 1\",\r\n      \"address_type\": \"ACTUAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7800000000000\",\r\n      \"city_kladr_id\": \"7800000600000\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v1/insured_objects/owners/natural_persons",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v1",
+						"insured_objects",
+						"owners",
+						"natural_persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "strahovatel",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"last_name\": \"Фамилия\",\r\n  \"first_name\": \"Имя\",\r\n  \"patronymic\": \"Отчество\",\r\n  \"birth_date\": \"1990-01-01\",\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"RUSSIAN_INTERNAL_PASSPORT\",\r\n      \"issue_date\": \"2010-10-10\",\r\n      \"issue_point\": \"УФМС\",\r\n      \"issue_point_code\": \"123-456\",\r\n      \"number\": \"123456\",\r\n      \"series\": \"1234\"\r\n    }\r\n  ],\r\n  \"address\": [\r\n    {\r\n      \"address_query\": \"г Санкт-Петербург, г Ломоносов, ул Швейцарская, д 1 к 1, кв 1\",\r\n      \"address_type\": \"LEGAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7800000000000\",\r\n      \"city_kladr_id\": \"7800000600000\"\r\n    },\r\n    {\r\n      \"address_query\": \"г Санкт-Петербург, г Ломоносов, ул Швейцарская, д 1 к 1, кв 1\",\r\n      \"address_type\": \"ACTUAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7800000000000\",\r\n      \"city_kladr_id\": \"7800000600000\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v1/insured_objects/insurants/natural_persons",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v1",
+						"insured_objects",
+						"insurants",
+						"natural_persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "avto",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"car_model_id\": 864026180,\r\n  \"engine_power\": 211,\r\n  \"chassis_number\": 333,\r\n  \"car_body_number\": 7777777,\r\n  \"vin_number\": \"WAUZZZ8T4BA037241\",\r\n  \"number_plate\": \"Р904МХ178\",\r\n  \"manufacturing_year\": 2010,\r\n  \"max_mass\": null,\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"VEHICLE_REGISTRATION\",\r\n      \"issue_date\": \"2010-11-01\",\r\n      \"number\": \"267461\",\r\n      \"series\": \"78УН\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v3/insured_objects/cars",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v3",
+						"insured_objects",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"drivers\": [\r\n      \"f667813d-cc0e-411f-952e-34fb896c8403\"\r\n  ],\r\n  \"owner\": \"0cff2a24-aa68-4aa9-aeab-37852d5f018f\",\r\n  \"car\": \"a73af321-3bc0-49ce-9479-e54cd8da0b2a\",\r\n  \"insurant\": \"043a1d2e-c440-4f2e-a10c-bcf0777055a0\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v1/insured_objects/",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v1",
+						"insured_objects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dogovor",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valid_from\": \"2024-07-02\",\r\n  \"valid_to\": \"2025-07-01\",\r\n  \"insurance_period\": \"1 год\",\r\n  \"target_of_using\": 11,\r\n  \"drivers_ids\": [\"f667813d-cc0e-411f-952e-34fb896c8403\"],\r\n  \"engine_power\": 211,\r\n  \"owner_registration\": \"г Санкт-Петербург, г Ломоносов, ул Швейцарская, д 1 к 1, кв 1\",\r\n    \"owner\": \"0cff2a24-aa68-4aa9-aeab-37852d5f018f\",\r\n    \"id\": \"7945cb0a-50be-428c-a5b0-6128103679b1\",\r\n    \"insurant\": \"043a1d2e-c440-4f2e-a10c-bcf0777055a0\",\r\n    \"periods\":[]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://partner.agentapp.ru/v3/agreements/calculations",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"agentapp",
+						"ru"
+					],
+					"path": [
+						"v3",
+						"agreements",
+						"calculations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upddogovor",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/agreements/{{agreement_id}}",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"agreements",
+						"{{agreement_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "raschet",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/agreements/{{agreement_id}}/results/TEST_COMPANY",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"agreements",
+						"{{agreement_id}}",
+						"results",
+						"TEST_COMPANY"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
