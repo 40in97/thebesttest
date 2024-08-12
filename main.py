@@ -1,36 +1,59 @@
-import time
+from pydantic import BaseModel, ValidationError
+import config
+import logging
+import asyncio
+from aiogram.filters.command import Command,CommandStart
+from aiogram import Bot, Dispatcher, types,F,Router
+from aiogram.types.message import ContentType, Message
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder,ReplyKeyboardBuilder
+from aiogram.types.web_app_info import WebAppInfo
 
-# webdriver это и есть набор команд для управления браузером
-from selenium import webdriver
 
-# импортируем класс By, который позволяет выбрать способ поиска элемента
-from selenium.webdriver.common.by import By
+bot = Bot(token=config.TOKEN)
+dp = Dispatcher()
 
-# инициализируем драйвер браузера. После этой команды вы должны увидеть новое открытое окно браузера
-driver = webdriver.Chrome()
+@dp.message(CommandStart())
+async def start(message: types.Message):
+    kb = [
+        [types.KeyboardButton(text="Открыть веб-страницу",web_app=WebAppInfo(url='https://rawcdn.githack.com/40in97/thebesttest/4655090b3ac7e9fd96a7b37673c4090e2c5b853c/index.html'))]
+    ]
 
-# команда time.sleep устанавливает паузу в 5 секунд, чтобы мы успели увидеть, что происходит в браузере
-time.sleep(5)
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Привет,мой друг!", reply_markup=keyboard)
 
-# Метод get сообщает браузеру, что нужно открыть сайт по указанной ссылке
-driver.get("https://stepik.org/lesson/25969/step/12")
-time.sleep(5)
 
-# Метод find_element позволяет найти нужный элемент на сайте, указав путь к нему. Способы поиска элементов мы обсудим позже
-# Метод принимает в качестве аргументов способ поиска и значение, по которому мы будем искать
-# Ищем поле для ввода текста
-textarea = driver.find_element(By.CSS_SELECTOR, ".textarea")
+PRICE = {
+    '1': [types.LabeledPrice(label='Item1', amount=100000)],
+    '2': [types.LabeledPrice(label='Item2', amount=200000)],
+    '3': [types.LabeledPrice(label='Item3', amount=300000)],
+    '4': [types.LabeledPrice(label='Item4', amount=400000)],
+    '5': [types.LabeledPrice(label='Item5', amount=500000)],
+    '6': [types.LabeledPrice(label='Item6', amount=600000)]
+}
 
-# Напишем текст ответа в найденное поле
-textarea.send_keys("get()")
-time.sleep(5)
+@dp.message(F.web_app_data)
+async def buy_process(web_app_message):
+    await bot.send_invoice(web_app_message.chat.id,
+                           title='Laptop',
+                           description='Description',
+                           provider_token='pay_token',
+                           currency='rub',
+                           need_email=True,
+                           prices=PRICE[f'{web_app_message.web_app_data.data}'],
+                           start_parameter='example',
+                           payload='some_invoice')
 
-# Найдем кнопку, которая отправляет введенное решение
-submit_button = driver.find_element(By.CSS_SELECTOR, ".submit-submission")
+@dp.pre_checkout_query(lambda query: True)
+async def pre_checkout_process(pre_checkout: types.PreCheckoutQuery):
+    await bot.answer_pre_checkout_query(pre_checkout.id, ok=True)
 
-# Скажем драйверу, что нужно нажать на кнопку. После этой команды мы должны увидеть сообщение о правильном ответе
-submit_button.click()
-time.sleep(5)
+@dp.message(F.types.ContentType.SUCCESSFUL_PAYMENT)
+async def successful_payment(message: types.Message):
+    await bot.send_message(message.chat.id, 'Платеж прошел успешно!')
 
-# После выполнения всех действий мы должны не забыть закрыть окно браузера
-driver.quit()
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
