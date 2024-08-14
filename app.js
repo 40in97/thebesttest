@@ -13,7 +13,7 @@ let btn3 = document.getElementById("btn3");
 let btn4 = document.getElementById("btn4");
 let btn5 = document.getElementById("btn5");
 let btn6 = document.getElementById("btn6");
-let btn6 = document.getElementById("btn7");
+let btn7 = document.getElementById("btn7");
 
 btn1.addEventListener("click", function(){
 	if (tg.MainButton.isVisible) {
